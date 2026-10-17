@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const os = require('node:os');
-const { install, hashes } = require('../scripts/install.cjs');
+const { install } = require('../scripts/install.cjs');
 const names = require('../manifest.json').skills;
 
 async function home(t) {
@@ -30,7 +30,7 @@ const profile = (root, name = 'kira') => path.join(root, '.agents', 'skills', na
 test('dry run creates no files; fresh install shares exact instructions with Claude', async t => {
   const root = await home(t);
   const preview = await install({ root, dryRun: true });
-  assert.equal(preview.actions.length, 7);
+  assert.equal(preview.actions.length, 6);
   assert.deepEqual(await fs.readdir(root), []);
   await install({ root });
   for (const name of names) {
@@ -54,11 +54,11 @@ test('local edits are shared immediately and never overwritten, including --upda
 
 test('unrelated profiles are preserved and preflight prevents partial installation', async t => {
   const root = await home(t);
-  await fs.mkdir(profile(root, 'pixie'), { recursive: true });
-  await fs.writeFile(path.join(profile(root, 'pixie'), 'SKILL.md'), 'Existing user profile');
+  await fs.mkdir(profile(root, 'vex'), { recursive: true });
+  await fs.writeFile(path.join(profile(root, 'vex'), 'SKILL.md'), 'Existing user profile');
   await assert.rejects(install({ root, update: true }), /not managed/);
-  assert.equal(await fs.readFile(path.join(profile(root, 'pixie'), 'SKILL.md'), 'utf8'), 'Existing user profile');
-  assert.deepEqual(await fs.readdir(path.dirname(profile(root))), ['pixie']);
+  assert.equal(await fs.readFile(path.join(profile(root, 'vex'), 'SKILL.md'), 'utf8'), 'Existing user profile');
+  assert.deepEqual(await fs.readdir(path.dirname(profile(root))), ['vex']);
 });
 
 test('changed package version requires --update and backs up prior managed content', async t => {
@@ -104,44 +104,4 @@ test('links to unrelated Claude destinations are not retargeted', async t => {
   await fs.symlink(outside, path.join(root, '.claude', 'skills', 'kira'), process.platform === 'win32' ? 'junction' : 'dir');
   await assert.rejects(install({ root }), /points elsewhere/);
   assert.equal(await fs.realpath(path.join(root, '.claude', 'skills', 'kira')), await fs.realpath(outside));
-});
-
-async function legacyPixie(root) {
-  const folder = profile(root, 'pixie');
-  await fs.mkdir(folder, { recursive: true });
-  await fs.writeFile(path.join(folder, 'SKILL.md'), '---\nname: pixie\n---\nOriginal Pixie instructions.\n');
-  await fs.writeFile(path.join(folder, '.agent-team.json'), JSON.stringify({
-    owner: 'bwdurst/agent-team', name: 'pixie', version: '0.1.0', hashes: await hashes(folder),
-  }));
-  await fs.mkdir(path.join(root, '.claude', 'skills'), { recursive: true });
-  await fs.symlink(folder, path.join(root, '.claude', 'skills', 'pixie'), process.platform === 'win32' ? 'junction' : 'dir');
-  return folder;
-}
-
-test('legacy Pixie upgrades to a forwarding alias with original backed up and Vex shared', async t => {
-  const root = await home(t);
-  const folder = await legacyPixie(root);
-  await assert.rejects(install({ root }), /--update/);
-  await assert.rejects(fs.access(profile(root, 'vex')), { code: 'ENOENT' });
-  const result = await install({ root, update: true });
-  const old = result.actions.find(x => x.name === 'pixie');
-  assert.equal(old.action, 'update');
-  assert.match(await fs.readFile(path.join(old.backup, 'SKILL.md'), 'utf8'), /Original Pixie instructions/);
-  const alias = await fs.readFile(path.join(folder, 'SKILL.md'), 'utf8');
-  const reference = alias.match(/\]\((\.\.\/vex\/SKILL\.md)\)/)[1];
-  const canonical = path.resolve(folder, reference);
-  assert.equal(canonical, path.join(profile(root, 'vex'), 'SKILL.md'));
-  await fs.appendFile(canonical, '\nVex customization.\n');
-  assert.match(await fs.readFile(path.join(root, '.claude', 'skills', 'vex', 'SKILL.md'), 'utf8'), /Vex customization/);
-  assert.equal(await fs.realpath(path.join(root, '.claude', 'skills', 'pixie')), await fs.realpath(folder));
-});
-
-test('customized legacy Pixie is preserved and prevents partial Vex migration', async t => {
-  const root = await home(t);
-  const folder = await legacyPixie(root);
-  await fs.appendFile(path.join(folder, 'SKILL.md'), '\nMy custom personality.\n');
-  await assert.rejects(install({ root, update: true }), /locally modified/);
-  assert.match(await fs.readFile(path.join(folder, 'SKILL.md'), 'utf8'), /My custom personality/);
-  await assert.rejects(fs.access(profile(root, 'vex')), { code: 'ENOENT' });
-  await assert.rejects(fs.access(path.join(root, '.agent-team-backups')), { code: 'ENOENT' });
 });

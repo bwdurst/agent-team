@@ -1,6 +1,0 @@
-interface:
-  display_name: "Pixie (Vex alias)"
-  short_description: "Compatibility name for Vex"
-  default_prompt: "Use $pixie to load Vex for this task."
-policy:
-  allow_implicit_invocation: false

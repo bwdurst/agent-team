@@ -1,6 +1,6 @@
 {
   "name": "@bwdurst/agent-team",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Portable team personas for Claude and Codex",
   "license": "MIT",

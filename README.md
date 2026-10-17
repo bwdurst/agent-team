@@ -22,7 +22,7 @@ node scripts/install.cjs --dry-run
 node scripts/install.cjs
 ```
 
-The installer copies six persona folders plus the `pixie` compatibility alias into `~/.agents/skills/` and creates directory links from `~/.claude/skills/` to them. On Windows these are junctions; on macOS/Linux they are directory symlinks. Codex installations that discover `~/.agents/skills` read the shared source directly. Reload skills or start a fresh chat after installation. Some hosts do not discover these locations: explicitly ask the assistant to read the relevant `SKILL.md`, or use that host's documented skill-import mechanism.
+The installer copies six persona folders into `~/.agents/skills/` and creates directory links from `~/.claude/skills/` to them. On Windows these are junctions; on macOS/Linux they are directory symlinks. Codex installations that discover `~/.agents/skills` read the shared source directly. Reload skills or start a fresh chat after installation. Some hosts do not discover these locations: explicitly ask the assistant to read the relevant `SKILL.md`, or use that host's documented skill-import mechanism.
 
 Installation is explicit, not automatic on download or `npm install`. It never reads credentials, changes model configuration, installs scheduled jobs, or contacts either model provider. It stops before writing if any existing profile would conflict. Existing unrelated profiles, modified managed profiles, and links pointing elsewhere are preserved, even with `--update`.
 
@@ -58,11 +58,9 @@ node scripts/install.cjs --update
 
 The installer compares version and SHA-256 file hashes. Unchanged installs are idempotent. Updates replace only unmodified copies managed by this installer and preserve the prior folder under `~/.agent-team-backups/`. It never overwrites local edits or extra files. For customized or pre-existing profiles, compare and merge the new instructions manually; there is deliberately no force-overwrite switch.
 
-Since version 0.1.1, Pixie is named **Vex**. `$vex` / `/vex` loads the maintained profile; `$pixie` / `/pixie` forwards to that same profile. New speech uses `VEX:`. An unmodified 0.1.0 install upgrades with `--update`: the old Pixie folder is backed up, Vex is installed, and Pixie becomes a forwarding alias. Customized Pixie profiles stop the update before any writes. To migrate those, back up your folders, move your customized Pixie profile to `vex`, change only its name, paths and spoken prefix, and replace `pixie/SKILL.md` with the forwarding alias. Keep both Claude links pointing to their matching shared folders. Do not overwrite your custom behavior with the stock Vex profile.
+The installer preflights all profiles before writing. Installation is not a filesystem-wide transaction: a disk or link-creation failure can leave some profiles installed. Correct the reported problem and rerun; unchanged profiles are skipped. A crash may leave a lock or staging folder in the chosen home directory. Remove a stale lock only after confirming no installer is running. Staging folders and backups are left for inspection, not automatically deleted.
 
-The installer preflights all profiles and aliases before writing. Installation is not a filesystem-wide transaction: a disk or link-creation failure can leave some profiles installed. Correct the reported problem and rerun; unchanged profiles are skipped. A crash may leave a lock or staging folder in the chosen home directory. Remove a stale lock only after confirming no installer is running. Staging folders and backups are left for inspection, not automatically deleted.
-
-To uninstall, remove the six persona and Pixie alias Claude **links themselves** first, then remove their shared folders only if you no longer need their contents. Do not recursively delete through a junction or symlink. This package provides no automatic uninstaller.
+To uninstall, remove the six persona Claude **links themselves** first, then remove their shared folders only if you no longer need their contents. Do not recursively delete through a junction or symlink. This package provides no automatic uninstaller.
 
 ## Verification and license
 
