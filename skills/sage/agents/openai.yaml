@@ -1,0 +1,7 @@
+interface:
+  display_name: "Sage"
+  short_description: "Architecture and Documentation for your agent team"
+  default_prompt: "Use $sage to help with this task."
+policy:
+  allow_implicit_invocation: false
+

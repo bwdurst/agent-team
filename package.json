@@ -1,0 +1,9 @@
+{
+  "name": "@bwdurst/agent-team",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portable team personas for Claude and Codex",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test", "setup": "node scripts/install.cjs" }
+}

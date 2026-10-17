@@ -1,0 +1,7 @@
+interface:
+  display_name: "Rook"
+  short_description: "Testing and Debugging for your agent team"
+  default_prompt: "Use $rook to help with this task."
+policy:
+  allow_implicit_invocation: false
+

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Cade"
+  short_description: "Code Review and Quality for your agent team"
+  default_prompt: "Use $cade to help with this task."
+policy:
+  allow_implicit_invocation: false
+

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Tanis"
+  short_description: "Implementation for your agent team"
+  default_prompt: "Use $tanis to help with this task."
+policy:
+  allow_implicit_invocation: false
+
