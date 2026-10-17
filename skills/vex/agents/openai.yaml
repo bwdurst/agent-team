@@ -1,0 +1,7 @@
+interface:
+  display_name: "Vex"
+  short_description: "UI and UX for your agent team"
+  default_prompt: "Use $vex to help with this task."
+policy:
+  allow_implicit_invocation: false
+

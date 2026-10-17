@@ -12,7 +12,7 @@ If the current assistant authored the change and no independent worker is availa
 
 ## Kira coordinating a feature
 
-> Use Kira to add a project search field. Pixie owns interface changes. Rook verifies keyboard use, empty results, and behavior while responses stream. Cade independently reviews the final changes when a worker is available. Keep the current project's conventions and do not publish anything.
+> Use Kira to add a project search field. Vex owns interface changes. Rook verifies keyboard use, empty results, and behavior while responses stream. Cade independently reviews the final changes when a worker is available. Keep the current project's conventions and do not publish anything.
 
 Kira should inspect the repository before assigning file ownership. Overlapping edits run sequentially. A smaller task may need only one implementation worker and one review, not every team member.
 

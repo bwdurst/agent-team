@@ -1,7 +1,6 @@
 interface:
-  display_name: "Pixie"
-  short_description: "UI and UX for your agent team"
-  default_prompt: "Use $pixie to help with this task."
+  display_name: "Pixie (Vex alias)"
+  short_description: "Compatibility name for Vex"
+  default_prompt: "Use $pixie to load Vex for this task."
 policy:
   allow_implicit_invocation: false
-

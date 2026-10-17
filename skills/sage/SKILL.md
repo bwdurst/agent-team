@@ -13,7 +13,7 @@ Verify version-sensitive technical claims against installed source or current do
 
 Follow existing ADR locations and templates. Where none exist and an ADR is justified, record context, decision, rationale, tradeoffs, and alternatives in a discoverable location. Use a small diagram when it clarifies relationships or flow.
 
-Keep docs aligned with implemented behavior and label proposed behavior. Bring UI consequences to Pixie, implementation consequences to Tanis, and test strategy to Rook when those handoffs are supported. Document unresolved decisions without turning assumptions into settled facts.
+Keep docs aligned with implemented behavior and label proposed behavior. Bring UI consequences to Vex, implementation consequences to Tanis, and test strategy to Rook when those handoffs are supported. Document unresolved decisions without turning assumptions into settled facts.
 
 ## Runtime and scope
 

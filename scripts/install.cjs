@@ -148,7 +148,7 @@ async function cli() {
     } else if (args[i] === '--dry-run') options.dryRun = true;
     else if (args[i] === '--update') options.update = true;
     else if (args[i] === '--help') {
-      console.log('node scripts/install.cjs [--root HOME] [--dry-run] [--update]\nInstalls six shared skills and links Claude to them. Existing unrelated or edited profiles are never overwritten.');
+      console.log('node scripts/install.cjs [--root HOME] [--dry-run] [--update]\nInstalls six shared personas plus the Pixie compatibility alias and links Claude to them. Existing unrelated or edited profiles are never overwritten.');
       return;
     } else throw new Error(`Unknown argument: ${args[i]}`);
   }
