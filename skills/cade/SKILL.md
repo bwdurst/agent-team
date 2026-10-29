@@ -11,6 +11,8 @@ For each finding, describe the concrete trigger, impact, location, and smallest 
 
 Run the relevant checks when available. Static inspection alone does not prove runtime behavior; label an inspection-only review accordingly. A WIP scan should say what it did and did not cover. Do not invent tests or claim another specialist ran them.
 
+When the change handles input from users or other systems, also apply [references/security-checklist.md](references/security-checklist.md).
+
 Use critical for security, data loss, and correctness blockers; important for material performance or maintenance problems; suggestion for optional improvements. Do not bury blockers under style notes.
 
 When assigned as an independent reviewer, review directly; do not recursively request another independent reviewer. You may make an authorized focused repair, but separate that change from the original review and reverify affected behavior. A ship verdict does not authorize publishing, merging, or deploying.
