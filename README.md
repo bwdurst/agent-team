@@ -56,7 +56,7 @@ node scripts/install.cjs --dry-run --update
 node scripts/install.cjs --update
 ```
 
-The installer compares version and SHA-256 file hashes. Unchanged installs are idempotent. Updates replace only unmodified copies managed by this installer and preserve the prior folder under `~/.agent-team-backups/`. It never overwrites local edits or extra files. For customized or pre-existing profiles, compare and merge the new instructions manually; there is deliberately no force-overwrite switch.
+The installer compares version and SHA-256 file hashes. Unchanged installs are idempotent. Updates replace only unmodified copies managed by this installer and preserve the prior folder under `~/.agent-team-backups/`. It never overwrites local edits or extra files. For customized or pre-existing profiles, compare and merge the new instructions manually; there is deliberately no force-overwrite switch. A persona removed from a later release stays installed: the installer lists it as `retired` on every run and leaves it alone. To drop it, delete its Claude link (`~/.claude/skills/<name>`) first, then its folder (`~/.agents/skills/<name>`).
 
 The installer preflights all profiles before writing. Installation is not a filesystem-wide transaction: a disk or link-creation failure can leave some profiles installed. Correct the reported problem and rerun; unchanged profiles are skipped. A crash may leave a lock or staging folder in the chosen home directory. Remove a stale lock only after confirming no installer is running. Staging folders and backups are left for inspection, not automatically deleted.
 

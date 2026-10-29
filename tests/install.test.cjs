@@ -97,6 +97,23 @@ test('linked installation parent and concurrent installer lock are refused', asy
   await assert.rejects(fs.access(profile(root)), { code: 'ENOENT' });
 });
 
+test('a managed skill dropped from the manifest is reported, not removed; foreign folders are ignored', async t => {
+  const root = await home(t);
+  await install({ root });
+  const old = profile(root, 'legacy');
+  await fs.mkdir(old, { recursive: true });
+  await fs.writeFile(path.join(old, 'SKILL.md'), 'old');
+  await fs.writeFile(path.join(old, '.agent-team.json'), JSON.stringify({ owner: 'bwdurst/agent-team', name: 'legacy', version: '0.0.1', hashes: {} }));
+  await fs.mkdir(profile(root, 'mine'), { recursive: true });
+  await fs.writeFile(path.join(profile(root, 'mine'), 'SKILL.md'), 'user profile');
+  for (const update of [false, true]) {
+    const result = await install({ root, update });
+    assert.deepEqual(result.retired, ['legacy']);
+  }
+  assert.equal(await fs.readFile(path.join(old, 'SKILL.md'), 'utf8'), 'old');
+  assert.equal((await install({ root, dryRun: true })).retired.length, 1);
+});
+
 test('links to unrelated Claude destinations are not retargeted', async t => {
   const root = await home(t);
   const outside = await home(t);

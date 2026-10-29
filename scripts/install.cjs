@@ -92,7 +92,24 @@ async function plan(root, update) {
     }
     actions.push({ name, source, target, link, incoming, action, createLink });
   }
-  return { version: manifest.version, actions };
+  return { version: manifest.version, actions, retired: await retiredSkills(root, manifest.skills) };
+}
+
+// Skills this installer once placed but the manifest no longer lists. They are
+// reported, never removed: the installer deletes nothing, and the Claude link
+// must go before its target folder.
+async function retiredSkills(root, current) {
+  const base = path.join(root, '.agents', 'skills');
+  const entries = await fs.readdir(base, { withFileTypes: true }).catch(e => { if (e.code === 'ENOENT') return []; throw e; });
+  const retired = [];
+  for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
+    if (current.includes(entry.name) || !entry.isDirectory() || entry.isSymbolicLink()) continue;
+    try {
+      const marker = JSON.parse(await fs.readFile(path.join(base, entry.name, MARKER), 'utf8'));
+      if (marker.owner === OWNER && marker.name === entry.name) retired.push(entry.name);
+    } catch { /* no readable marker: not ours */ }
+  }
+  return retired;
 }
 
 async function install({ root = os.homedir(), update = false, dryRun = false } = {}) {
@@ -156,6 +173,9 @@ async function cli() {
   console.log(`${options.dryRun ? 'Preview' : 'Completed'} agent-team ${result.version}`);
   for (const item of result.actions) {
     console.log(`${item.name}: ${item.action}${item.createLink ? ', link Claude' : ''}${item.backup ? `; backup: ${item.backup}` : ''}`);
+  }
+  for (const name of result.retired) {
+    console.log(`retired: ${name} (no longer in this package; remove the Claude link ~/.claude/skills/${name} first, then the folder ~/.agents/skills/${name})`);
   }
 }
 if (require.main === module) cli().catch(e => { console.error(e.message); process.exitCode = 1; });
