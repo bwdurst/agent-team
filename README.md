@@ -59,7 +59,7 @@ In Codex, invoke `$kira`; in Claude, use `/kira` where skill slash commands are 
 
 See [examples](examples/delegation.md) for smaller tasks and a portable worker brief. Persona names do not select a model. The runtime's configuration and permissions still apply, and a review verdict is not permission to publish or deploy.
 
-Each persona prefixes spoken chat with its uppercase name, such as `KIRA:`. A compatible TTS app can route those blocks to voices. This repository does not include audio playback, voice IDs, an Agent Hub app, API keys, or billing integrations. Do not assume standard Claude/Codex chat will speak with these voices.
+Each persona prefixes spoken chat with its uppercase name, such as `KIRA:`. A compatible TTS app can route those blocks to voices; [Agent TTS](https://github.com/bwdurst/agent-tts) is a Windows app that does this for Claude Code and Codex. This repository does not include audio playback, voice IDs, an Agent Hub app, API keys, or billing integrations. Do not assume standard Claude/Codex chat will speak with these voices.
 
 ## Customize and update
 
