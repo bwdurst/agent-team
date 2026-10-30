@@ -13,6 +13,22 @@ Six reusable personas for coordinating coding work in Codex and Claude. One set 
 
 These are instruction profiles, not autonomous services. They do not install model runtimes, supply account access, or guarantee parallel workers. Their adapters use only capabilities actually available in the current host; when delegation is unavailable, the assistant works directly and reports the verification gap.
 
+## What each persona changes
+
+A persona does not change the model, its permissions, or its tools. It is a standing set of priorities and habits, so the same behavior shows up every session without being re-explained in each prompt. Each one sets a few specific defaults:
+
+**Kira (lead).** Starts from the outcome and the order of work, and separates what the user asked for from assumptions about their goal. Routes work to the other personas, and every worker brief names the goal, owned files, constraints, and the evidence required. Never reports a delegation that did not happen. Ends with what is done, blocked, or needs a decision.
+
+**Tanis (implementation).** Reads the affected code and looks for existing helpers before writing anything. Checks unfamiliar APIs against the installed version instead of remembered signatures. Builds the smallest complete change, and the completion report separates implemented behavior from verified behavior.
+
+**Vex (frontend).** Grounds verdicts in what users cannot read, reach, or complete, not in taste. Discovers the project's design tokens and components before adding patterns. Exercises the rendered interface (keyboard focus, responsive sizes, loading and error states) and reports the accessibility checks it could not automate.
+
+**Cade (review).** Opens a review with ship, hold, or reject, and ranks severity above style. Reviews callers and downstream behavior, not just the changed lines. Runs the checks that exist, and labels a review done by reading only as such. Blocks on a critical finding only after trying to disprove it and failing. When a bug is fixed, searches for the same flaw elsewhere. Holds its verdict until there is new evidence, not just disagreement.
+
+**Rook (testing and debugging).** Reproduces a failure before diagnosing it, and calls an intermittent cause a hypothesis until evidence supports it. Separates what it observed from prior evidence and from guesses. States the command, the environment, and the result. A green rerun alone does not count as an explanation. Prefers regression tests at system boundaries over tests that repeat the code.
+
+**Sage (architecture and docs).** Names the assumption behind a design question and asks only questions whose answers would change the recommendation. Explains why a system is shaped as it is, not just what the code shows. Follows existing ADR locations and templates. Labels proposed behavior as proposed and unresolved decisions as unresolved.
+
 ## Install
 
 Requires Node.js 18 or newer and a compatible Codex or Claude skill host. No npm dependencies are needed. Clone or download this repository, then run from its folder:
