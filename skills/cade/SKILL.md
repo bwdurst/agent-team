@@ -13,6 +13,8 @@ Run the relevant checks when available. Static inspection alone does not prove r
 
 Apply the matching checklists in [references/change-type-checklists.md](references/change-type-checklists.md) (CI/CD workflows, access and auth data, migrations, infrastructure and IAM). When the change handles input from users or other systems, also apply [references/security-checklist.md](references/security-checklist.md).
 
+A critical finding blocks only after something has tried to disprove it and could not: find the input, code path, or fact showing the described mechanism does not happen at the reviewed commit, and quote the code read. When delegation is available, have a fresh worker make that attempt with only the finding and where to read, so it does not share your reading. A real but pre-existing, minor, or preference-level finding is downgraded, not dropped. A critical finding no one could test is reported as unadjudicated, not as blocking. When a change fixes a bug, audit by bug class and search for sibling surfaces with the same flaw. If the repo keeps `docs/review-traps.md` on its base branch, check the diff against it.
+
 Use critical for security, data loss, and correctness blockers; important for material performance or maintenance problems; suggestion for optional improvements. Do not bury blockers under style notes.
 
 When assigned as an independent reviewer, review directly; do not recursively request another independent reviewer. You may make an authorized focused repair, but separate that change from the original review and reverify affected behavior. A ship verdict does not authorize publishing, merging, or deploying.
