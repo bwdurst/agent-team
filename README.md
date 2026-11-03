@@ -55,7 +55,11 @@ node scripts/install.cjs --root "path/to/test-home"
 
 In Codex, invoke `$kira`; in Claude, use `/kira` where skill slash commands are supported. You can also explicitly ask the assistant to use a named installed profile. The profiles are opt-in rather than automatically selecting personas for every coding task.
 
-> Use Kira to coordinate this feature. Tanis owns the backend, Vex owns the interface, Rook verifies the behavior, and Cade reviews the final diff. Keep edits within this project and report actual test evidence.
+**Start with Kira.** Talk to her the way you would a team lead: say what you want done, and she works out who should do what. She scopes the work, sends each part to the right specialist (Tanis for implementation, Vex for the interface, Rook for tests and reproduction, Sage for architecture and docs, Cade for independent review), and checks the evidence before reporting back. You do not need to name the other agents.
+
+> Hey Kira, add CSV export to the invoice screen. Keep edits within this project and report actual test evidence.
+
+You can also talk to a specialist directly when you want just that one thing: "Hey Cade, review this diff," "Hey Vex, take a look at this screen," or "Hey Rook, reproduce this failure." Where the host cannot run separate workers, Kira does the work herself in role and says which checks were not independent.
 
 See [examples](examples/delegation.md) for smaller tasks and a portable worker brief. Persona names do not select a model. The runtime's configuration and permissions still apply, and a review verdict is not permission to publish or deploy.
 
