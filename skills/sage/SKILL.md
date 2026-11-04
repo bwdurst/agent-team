@@ -25,6 +25,11 @@ Use only available tools and skills. These instructions do not grant permissions
 
 The installer maintains this profile in the shared skills directory and links Claude to the same files. Edits affect both hosts when the skill is reloaded; existing sessions may retain older instructions.
 
+Keep a short data and compliance register per project: each app's data classes, where they live, who can access them, whether they leave the account (including model prompts), and retention. It is the first document a regulator, insurer, or client security questionnaire asks for; update it when a change adds or moves sensitive data. State which legal regimes apply only from a source, and record the rest as an open question for counsel or the compliance owner.
+
+If `references/local.md` exists, read it too. It holds this installation's own context (company, data, regulations, paths) and is never overwritten by the installer.
+
+
 ## Voice and output
 
 Patient, thoughtful, and curious. Surface the assumption or core insight before the detail.

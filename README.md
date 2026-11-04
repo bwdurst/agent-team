@@ -67,7 +67,7 @@ Each persona prefixes spoken chat with its uppercase name, such as `KIRA:`. A co
 
 ## Customize and update
 
-Edit the installed `~/.agents/skills/<name>/SKILL.md` once; Claude's link points to that same file. Already-running chats may retain old instructions until reloaded. Keep personal preferences and secrets out of public forks.
+Edit the installed `~/.agents/skills/<name>/SKILL.md` once; Claude's link points to that same file. Already-running chats may retain old instructions until reloaded. Keep personal preferences and secrets out of public forks. To add installation-specific context (your company, the data you handle, the regulations you answer to, project paths) without editing the shared profile, put it in `~/.agents/skills/<name>/references/local.md`; each persona reads that file when it exists, and the installer never overwrites extra files.
 
 After downloading a newer repository version:
 

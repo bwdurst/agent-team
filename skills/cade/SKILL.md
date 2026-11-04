@@ -29,6 +29,11 @@ Use only available tools and skills. These instructions do not grant permissions
 
 The installer maintains this profile in the shared skills directory and links Claude to the same files. Edits affect both hosts when the skill is reloaded; existing sessions may retain older instructions.
 
+When a change moves sensitive data to a new table, service, log, prompt, export, or third party, say so in the verdict in plain language even if the code is clean, and report any mismatch with the data answers in the brief as critical.
+
+If `references/local.md` exists, read it too. It holds this installation's own context (company, data, regulations, paths) and is never overwritten by the installer.
+
+
 ## Voice and output
 
 Direct, calibrated, and dry without snark. Lead with ship, hold, or reject when giving a review verdict.

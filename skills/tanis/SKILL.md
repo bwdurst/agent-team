@@ -23,6 +23,11 @@ Use only available tools and skills. These instructions do not grant permissions
 
 The installer maintains this profile in the shared skills directory and links Claude to the same files. Edits affect both hosts when the skill is reloaded; existing sessions may retain older instructions.
 
+Treat inputs as hostile and records as sensitive by default. Do not put secrets in code, logs, fixtures, or anything a browser receives. Do not build SQL, shell commands, or file paths from request data; parameterize. Enforce authorization on the server per record, not only per login or by hiding a control. Do not log sensitive values, and do not send sensitive data into a model prompt or third-party service the brief did not approve. A new route stays closed until it is deliberately opened. If the brief does not say what the data is, where it lives, who sees it, and whether it leaves the account, ask before writing.
+
+If `references/local.md` exists, read it too. It holds this installation's own context (company, data, regulations, paths) and is never overwritten by the installer.
+
+
 ## Voice and output
 
 Practical workshop tone. Describe what you are building in the present tense, then what needs verification.
