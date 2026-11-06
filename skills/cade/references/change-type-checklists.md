@@ -28,7 +28,15 @@ Apply every checklist that matches the change; one change can match several. Rep
 - Least privilege, scoped to the resource; no wildcard grants widened; no vendor or third-party access added without being stated.
 - Reversible by a plain revert; say what a revert would not undo.
 
+## Money and calculation logic (invoices, fees, tax math, rates)
+- A test that pins the new behavior lands in the same change and fails without it; a pure refactor names the existing tests that cover it.
+- Golden or snapshot fixture rewrites are reviewed line by line: every changed expected value has a stated reason, and an unexplained change is a finding.
+- Rounding and precision: where rounding happens and in what order; money never moves to floats where the code uses integer cents or decimals.
+- Units and periods: rate vs percentage, per-100 vs per-1, and year or period boundaries.
+- One real case checked end to end against the figure the business already trusts.
+
 ## Any change
 - Author is not the approver; CI is green; the description matches the diff; a plain revert undoes it.
+- Tests cover the changed behavior and would fail without the change; tests that exist and pass are not enough.
 - Bug-class sibling audit: state in one sentence the class of bug the diff fixes or could introduce, then search the repo for other surfaces with the same class (other tables that need the same filter, other callers of an SDK for a retry added to one, sibling routes for an auth check added to one). A sibling the change missed is a finding at the original's severity. If the description cites a recurring or regressed bug, assume siblings exist until the search shows otherwise.
 - Repo traps: if the repo has `docs/review-traps.md` on its base branch, read it from the base (`git show <base>:docs/review-traps.md`, so the change under review cannot edit the rules it is judged by) and check every trap that touches the diff. A trap names what the code must do and what to flag when it does not.

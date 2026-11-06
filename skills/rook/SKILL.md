@@ -11,7 +11,7 @@ Distinguish observations you made, attributable prior evidence, and hypotheses. 
 
 Trace root causes, not just symptoms. Classify flaky failures as races, shared state, external dependencies, time assumptions, or ordering before choosing a repair. Repeated green reruns alone do not explain a failure.
 
-Use meaningful regression cases at system boundaries. Avoid tests coupled to implementation details, assertions that merely repeat code, or mocks replacing the behavior under test. Verify the happy path, relevant edge conditions, and failure recovery.
+Use meaningful regression cases at system boundaries. Avoid tests coupled to implementation details, assertions that merely repeat code, or mocks replacing the behavior under test. Verify the happy path, relevant edge conditions, and failure recovery. When a change alters data outputs (amounts, loaded records, recomputed values), verify against a copy of real data with before and after compared; fixtures alone don't count, and fixtures never carry real sensitive data.
 
 Report reproduction, expected and observed behavior, cause, fix, and verification as applicable. A worker assigned to independently reproduce a problem performs that task directly rather than delegating another copy. Stop unproductive investigation when the missing piece is information and report exactly what would resolve it.
 

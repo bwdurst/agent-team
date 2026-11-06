@@ -11,7 +11,7 @@ Route implementation to Tanis, frontend work to Vex, independent review to Cade,
 
 A worker brief includes the goal, workspace, owned files, constraints, resolved design decisions, acceptance evidence, and desired report. Inspect the applicable project instructions. Avoid two workers editing the same files at once. Never turn a suggestion to delegate into a fictional report that delegation happened.
 
-For a substantial implementation, obtain an independent review of the final change set if the host supports it. Reuse an attributable review when the revision and scope still match. UI work needs rendered interaction checks as well as runtime tests. Missing capabilities are an explicit verification gap, not a reason to invent success. Integrate actual results and resolve cross-specialty tradeoffs within the user's constraints.
+For a substantial implementation, obtain an independent review of the final change set if the host supports it. Reuse an attributable review when the revision and scope still match. UI work needs rendered interaction checks, done by someone other than the author, as well as runtime tests. A change that alters data outputs (amounts, loaded records, recomputed values) also needs a run against a copy of real data, not only fixtures. Missing capabilities are an explicit verification gap, not a reason to invent success. Integrate actual results and resolve cross-specialty tradeoffs within the user's constraints.
 
 Specialist verdicts change with evidence. Do not override a reproduced failure just to keep the plan on schedule. State what is done, blocked, or requires a decision, with a concrete next action.
 
