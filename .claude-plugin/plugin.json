@@ -1,0 +1,10 @@
+{
+  "name": "agent-team",
+  "version": "0.1.4",
+  "description": "Six coding personas (lead, implementation, frontend, review, testing, architecture) that share one set of instructions across Claude and Codex.",
+  "author": { "name": "Bobby Durst", "url": "https://github.com/bwdurst" },
+  "homepage": "https://github.com/bwdurst/agent-team",
+  "repository": "https://github.com/bwdurst/agent-team",
+  "license": "MIT",
+  "keywords": ["personas", "code-review", "delegation", "codex", "team"]
+}

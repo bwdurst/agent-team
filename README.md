@@ -51,6 +51,23 @@ node scripts/install.cjs --root "path/to/test-home"
 
 `--root` is a home directory, not the skills directory. The default is the current user's OS home directory. Custom `CODEX_HOME` or Claude configuration locations are not inferred. Parents containing symlinks/junctions are refused; use an ordinary target directory.
 
+### Other ways to install
+
+In Claude Code, from the plugin marketplace:
+
+```
+/plugin marketplace add bwdurst/claude-plugins
+/plugin install agent-team@bwdurst
+```
+
+Plugin skills are namespaced, so the personas are invoked as `/agent-team:kira` and so on. A plugin install lives in Claude Code's plugin cache, which is replaced on update, so a `references/local.md` overlay does not survive there; use the installer above if you want one.
+
+With the [skills](https://skills.sh) installer, for Claude Code, Codex and other agents:
+
+```bash
+npx skills add bwdurst/agent-team
+```
+
 ## Use
 
 In Codex, invoke `$kira`; in Claude, use `/kira` where skill slash commands are supported. You can also explicitly ask the assistant to use a named installed profile. The profiles are opt-in rather than automatically selecting personas for every coding task.
