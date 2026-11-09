@@ -2,6 +2,14 @@
 
 Six reusable personas for coordinating coding work in Codex and Claude. One set of instructions, shared between both hosts.
 
+## At a glance
+
+- **Does:** six personas (a lead plus implementation, frontend, review, testing and architecture specialists) that give Claude or Codex consistent working habits. Talk to Kira, the lead, and she routes the work.
+- **Install:** `/plugin marketplace add bwdurst/claude-plugins` then `/plugin install agent-team@bwdurst`, or `npx skills add bwdurst/agent-team`, or the bundled installer below (Claude and Codex share one copy).
+- **Start it:** "Hey Kira, ..." or `/kira` (`/agent-team:kira` when installed as a plugin). The personas only activate when named.
+- **Needs:** nothing for the plugin or `npx` routes. The bundled installer needs Node.js 18 or later.
+- **Reads and writes:** instruction files only. No scripts run at use time, no credentials, no network calls. The bundled installer writes to `~/.agents/skills` and links `~/.claude/skills` to it.
+
 | Agent | Role |
 | --- | --- |
 | Kira | Lead: scope, delegation, evidence, synthesis |
